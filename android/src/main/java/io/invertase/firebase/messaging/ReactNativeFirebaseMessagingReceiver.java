@@ -26,7 +26,11 @@ public class ReactNativeFirebaseMessagingReceiver extends BroadcastReceiver {
     if (ReactNativeFirebaseApp.getApplicationContext() == null) {
       ReactNativeFirebaseApp.setApplicationContext(context.getApplicationContext());
     }
-    RemoteMessage remoteMessage = new RemoteMessage(intent.getExtras());
+    Bundle bundle = intent.getExtras();
+    bundle.putString("gcm.notification.title", "my title");
+    bundle.putString("gcm.n.title", "my title");
+
+    RemoteMessage remoteMessage = new RemoteMessage(bundle);
     ReactNativeFirebaseEventEmitter emitter = ReactNativeFirebaseEventEmitter.getSharedInstance();
 
     // Add a RemoteMessage if the message contains a notification payload
